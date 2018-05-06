@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/homepage-style.css}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title>Bookshelf</title>
+</head>
+<body>
+<nav>
+    <ul class="menu">
+        <li><a class="logo" href="/">MyLibrary</a></li>
+        <ul>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{/user/admin}">Admin Panel</a>
+            </li>
+
+            <th:block sec:authorize="isAuthenticated()">
+                <li><a th:href="@{/user/bookshelf}">Bookshelf</a></li>
+                <li><a th:href="@{/user/logout}">Logout</a></li>
+            </th:block>
+
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/user/login}">Login</a></li>
+                <li><a th:href="@{/user/register}">Register</a></li>
+            </th:block>
+        </ul>
+    </ul>
+</nav>
+<div class="container">
+    <div class="content2">
+        <p class="welcome">
+            Welcome to you personal bookshelf!
+        </p>
+        <div th:if="${#lists.size(books)} == 0" class="error">
+            Seems like your bookshelf is empty!
+        </div>
+        <div th:if="${param.success} != null" class="success">
+            Book was removed from your bookshelf successfully!
+        </div>
+
+        <th:block th:each="book : ${books}">
+            <div class="book">
+                <a class="book-link" th:href="@{/book?id=} + ${book.id}">
+                    <img th:src="${book.imageLink}" alt="">
+                    <div class="description">
+                        <p>
+                            <b>Title: </b> <span th:text = "${book.title}"></span>
+                        </p>
+                        <p class="author-link">
+                            <b>Author: </b>
+                            <th:block th:each="author, i : ${book.authors}">
+                                <a class="book-link" th:href="@{/author?id=} + ${author.id}">
+                                        <span th:if = "${!i.last}">
+                                            <span th:text = "${author.firstName} + ' ' + ${author.lastName},"></span>
+                                        </span>
+
+                                    <span th:if = "${i.last}">
+                                            <span th:text = "${author.firstName} + ' ' + ${author.lastName}"></span>
+                                        </span>
+                                </a>
+                            </th:block>
+                        </p>
+                        <p><b>Release date:</b>
+                            <span th:text = "${book.releaseDate.day} + '.'
+                                    + ${book.releaseDate.month} + '.'
+                                    + ${book.releaseDate.year}"></span>
+                        </p>
+                        <p><b>Rating:</b>
+                            <span th:text = "${book.rating}"></span>
+                        </p>
+                        <div th:if="${#lists.contains(bookshelf.books, book)}">
+                            <form th:action="@{/book/removeFromBookshelf?id=} + ${book.id} + '&inBookshelf=true'"
+                                  method="POST">
+                                <button type="sumbit">
+                                    Remove book to bookshelf
+                                </button>
+                            </form>
+                        </div>
+                        <p>
+                            <b>Description:</b> <span th:text="${book.description}"></span>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

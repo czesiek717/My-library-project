@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" th:href="@{/css/listBooks.css}">
+    <title>List Books</title>
+</head>
+<body>
+<nav>
+    <ul class="menu">
+        <li><a class="logo" href="/">MyLibrary</a></li>
+        <ul>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{/user/admin}">Admin Panel</a>
+            </li>
+
+            <th:block sec:authorize="isAuthenticated()">
+                <li><a th:href="@{/user/logout}">Logout</a></li>
+            </th:block>
+
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/user/login}">Login</a></li>
+                <li><a th:href="@{/user/register}">Register</a></li>
+            </th:block>
+        </ul>
+    </ul>
+</nav>
+<div class="container">
+    <div class="content">
+        <div>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>Book's ID</th>
+                        <th>Book's title</th>
+                        <th>Book's rating</th>
+                        <th>Book's release date</th>
+                        <th>Book's authors</th>
+                        <th>Action</th>
+                    </tr>
+                    <th:block th:each="book : ${books}">
+                        <tr>
+                            <td><span th:text="${book.id}"></span></td>
+                            <td>
+                                <a class="book-link" th:href="@{/book?id=} + ${book.id}">
+                                    <span th:text="${book.title}"></span>
+                                </a>
+                            </td>
+                            <td><span th:text="${book.rating}"></span></td>
+                            <td><span th:text="${book.releaseDate}"></span></td>
+                            <td>
+                                <th:block th:each="author, i : ${book.authors}">
+                                    <a class="book-link" th:href="@{/author?id=} + ${author.id}">
+                                        <span th:if="${!i.last}">
+                                            <span th:text="${author.firstName} + ' ' + ${author.lastName} + ','"></span>
+                                        </span>
+
+                                        <span th:if="${i.last}">
+                                            <span th:text="${author.firstName} + ' ' + ${author.lastName}"></span>
+                                        </span>
+                                    </a>
+                                </th:block>
+                            </td>
+                            <td class="action">
+                                <p>
+                                    <a th:href="@{/user/admin/updateBook?id=} + ${book.id}">Update</a>
+                                    |
+                                    <a th:href="@{/user/admin/deleteBook?id=} + ${book.id}"
+                                       onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">Delete</a>
+                                </p>
+
+                                <p>
+                                    <a th:href="@{/user/admin/resetBooksRating?id=} + ${book.id}"
+                                       onclick="if (!(confirm('Are you sure you want to reset rating of this book?'))) return false">Reset rating</a>
+                                    |
+                                    <a th:href="@{/user/admin/resetBooksAuthors?id=} + ${book.id}"
+                                       onclick="if (!(confirm('Are you sure you want to reset authors of this book?'))) return false">Reset authors</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

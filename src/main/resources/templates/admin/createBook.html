@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/register-style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <title>Create Book</title>
+</head>
+<body>
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Create book</h1>
+                <hr/>
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form th:action="@{/user/admin/createBook}" th:object="${book}" method="POST" class="form-horizontal">
+                <input type="hidden" th:field="${book.id}"/>
+                <input type="hidden" th:field="${book.rating}"/>
+                <input type="hidden" th:field="${book.numberOfRatings}"/>
+                <input type="hidden" th:field="${book.releaseDate.id}"/>
+                <div th:if="${param.error} != null" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                    Seems like something went wrong while creating an book!
+                    Please try again.
+                </div>
+                <div th:if="${param.success} != null" class="alert alert-success col-xs-offset-1 col-xs-10">
+                    Book created successfully!
+                </div>
+
+                <div class="form-group">
+                    <label for="title" class="cols-sm-2 control-label">Book's title</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:field="${book.title}" name="title" id="title"
+                                   placeholder="Enter book's title"/>
+                        </div>
+                        <p th:errors="*{title}" th:class="${#fields.hasErrors('title')}? error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="cols-sm-2 control-label">Book's description</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <textarea th:class="form-control" th:field="${book.description}" name="description"
+                                      id="description" placeholder="Enter book's description" rows="10" cols="50">
+                            </textarea>
+                        </div>
+                        <p th:errors="*{description}" th:class="${#fields.hasErrors('description')}? error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageLink" class="cols-sm-2 control-label">Book's image link</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:field="${book.imageLink}" name="imageLink" id="imageLink"
+                                   placeholder="Enter book's imageLink"/>
+                        </div>
+                        <p th:errors="*{title}" th:class="${#fields.hasErrors('title')}? error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="releaseDate" class="cols-sm-2 control-label">Book's release date</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group" id="releaseDate">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <label>
+                                <select th:field="${book.releaseDate.day}" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                <select th:field="${book.releaseDate.month}" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </label>
+
+                            <input type="number" class="form-control" th:field="${book.releaseDate.year}"
+                                   placeholder="Enter book's releaseDate year"/>
+                            <p th:errors="*{releaseDate.year}"
+                               th:class="${#fields.hasErrors('releaseDate.year')}? error"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tempAuthors" class="cols-sm-2 control-label">Book's authors</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <textarea th:class="form-control" name="tempAuthors" id="tempAuthors"
+                                      placeholder="Enter book's authors" rows="2" cols="50"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="sumbit" class="btn btn-primary btn-lg btn-block login-button">Create book</button>
+                </div>
+            </form>
+            <div class="login-register">
+                <a th:href="@{/user/admin/listBooks}">To books list</a>
+            </div>
+
+            <div class="login-register">
+                <a th:href="@{/user/admin}">Admin panel</a>
+            </div>
+
+            <div class="login-register">
+                <a href="/">Main page</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

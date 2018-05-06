@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/register-style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <title>Register</title>
+</head>
+<body>
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Register</h1>
+                <hr/>
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form th:action="@{/user/register}" th:object="${user}" method="POST" class="form-horizontal">
+                <div th:if="${param.error} != null" class="alert alert-danger col-xs-offset-1 col-xs-10">
+                    Seems like something went wrong while creating an account!
+                    Please try again.
+                </div>
+                <div th:if="${param.success} != null" class="alert alert-success col-xs-offset-1 col-xs-10">
+                    Account created successfully!
+                </div>
+
+                <div class="form-group">
+                    <label for="username" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="username" id="username"
+                                   placeholder="Enter your username"/>
+                        </div>
+                        <p th:errors="*{username}" th:class="${#fields.hasErrors('username')}? error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="email" id="email"
+                                   placeholder="Enter your email"/>
+                        </div>
+                        <p th:errors="*{email}" th:class="${#fields.hasErrors('email')}? error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="password" id="password"
+                                   placeholder="Enter your password"/>
+                        </div>
+                        <p th:errors="*{password}" th:class="${#fields.hasErrors('password')}? error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordRepeated" class="cols-sm-2 control-label">Confirm Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated"
+                                   placeholder="Confirm your Password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="sumbit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                </div>
+                <div class="login-register">
+                    <a th:href="@{/user/login}">Login</a>
+                </div>
+                <div class="login-register">
+                    <a th:href="@{/}">Main page</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

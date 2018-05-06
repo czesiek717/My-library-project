@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/listBooks.css}">
+    <link rel="stylesheet" th:href="@{/css/adminPanel.css}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title>Admin Panel</title>
+</head>
+<body>
+<nav>
+    <ul class="menu">
+        <li><a class="logo" href="/">MyLibrary</a></li>
+        <ul>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{/user/admin}">Admin Panel</a>
+            </li>
+
+            <th:block sec:authorize="isAuthenticated()">
+                <li><a th:href="@{/user/logout}">Logout</a></li>
+            </th:block>
+
+            <th:block sec:authorize="isAnonymous()">
+                <li><a th:href="@{/user/login}">Login</a></li>
+                <li><a th:href="@{/user/register}">Register</a></li>
+            </th:block>
+        </ul>
+    </ul>
+</nav>
+<div class="container">
+    <div class="content">
+        <div class="table">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Create</th>
+                    <th>List</th>
+                </tr>
+
+                <tr>
+                    <td>Books</td>
+                    <td><a th:href="@{/user/admin/createBook}">Create book</a></td>
+                    <td><a th:href="@{/user/admin/listBooks}">List books</a></td>
+                </tr>
+
+                <tr>
+                    <td>Authors</td>
+                    <td><a th:href="@{/user/admin/createAuthor}">Create author</a></td>
+                    <td><a th:href="@{/user/admin/listAuthors}">List authors</a></td>
+                </tr>
+
+                <tr>
+                    <td>Users</td>
+                    <td><a th:href="@{/user/admin/createUser}">Create user</a></td>
+                    <td><a th:href="@{/user/admin/listUsers}">List users</a></td>
+                </tr>
+                <tr>
+                    <td>Reviews</td>
+                    <td></td>
+                    <td><a th:href="@{/user/admin/listReviews}">List reviews</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

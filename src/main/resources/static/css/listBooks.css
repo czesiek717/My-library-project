@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
+    background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
+    background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
+    background:      -o-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Opera 11.10+ */
+    background:         linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
+    width: 80vw;
+    margin: 5vh auto;
+}
+
+nav {
+    width: 100%;
+    padding: 0 70px;
+    margin: 0 auto 100px;
+    font-size: 1.9em;
+    position: relative;
+}
+
+.logo {
+    font-size: 2em;
+}
+
+nav:after {
+    content: '';
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    border: 1px solid #a2b8c4;
+    border-radius: 10px;
+    color: red;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+}
+.menu a {
+    color: white;
+}
+
+li {
+    display: block;
+}
+
+img {
+    width: 230px;
+    height: 330px;
+}
+
+.container {
+    background-color: #fff;
+    width: 100%;
+    min-height: 65vh;
+    margin: 0 auto;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 37px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 37px -10px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 37px -10px rgba(0,0,0,0.75);
+    text-align: center;
+}
+
+.action {
+    min-width: 120px;
+    margin-left: 10px;
+}
+
+.content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 5vh 0;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    max-width: 90%;
+}
+table td, table th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.table {
+    margin: 0 auto;
+}
+
+textarea {
+    resize: none;
+}

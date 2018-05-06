@@ -1,0 +1,23 @@
+@import "listBooks.css";
+
+a {
+    font-size: 1.4em;
+}
+
+li {
+    margin-bottom: 15px;
+    list-style: none;
+}
+
+.content {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 18vh 0;
+}
+
+.list {
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
